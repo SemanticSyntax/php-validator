@@ -1,0 +1,39 @@
+# Codecov configuration for SemanticSyntax Validator
+# Ensures professional reporting of coverage across PHP versions.
+
+codecov:
+  require_ci_to_pass: true
+  branch: main
+
+coverage:
+  precision: 2
+  round: down
+  range: "70..100"
+
+  status:
+    project:
+      default:
+        target: 80%        # minimum acceptable coverage
+        threshold: 1%      # allowed drop before failing
+    patch:
+      default:
+        target: 70%        # new code in PR should have decent coverage
+        threshold: 2%
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: true
+      loop: true
+      method: true
+      macro: false
+
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+
+ignore:
+  - "tests/*"              # ignore test files themselves
+  - "**/vendor/*"          # ignore dependencies
+  - "**/.phpstorm.meta.php"

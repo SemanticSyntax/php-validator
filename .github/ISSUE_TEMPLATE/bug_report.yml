@@ -1,0 +1,84 @@
+name: Bug Report
+description: File a bug report to help improve SemanticSyntax Validator
+title: "[Bug]: "
+labels: [bug]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report an issue with **SemanticSyntax Validator**.  
+        Please fill out the details below so we can reproduce and fix the problem.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the problem.
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Package Version
+      description: Which version of `semanticsyntax/validator` (or php7/php5 variant) are you using?
+      placeholder: e.g. v1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP Version
+      description: What PHP version are you running?
+      placeholder: e.g. 8.2.10
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps To Reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Install package version X
+        2. Run function Y with input Z
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment & Context
+      description: |
+        Please provide additional context:
+        - OS / Distro
+        - Web server (if applicable)
+        - Any relevant configuration
+      placeholder: |
+        OS: Ubuntu 22.04
+        PHP: 8.2.10
+        Web Server: Nginx 1.24
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs or Output
+      description: Paste any error messages or stack traces here.
+      render: shell

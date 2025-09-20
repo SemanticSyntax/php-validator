@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<ruleset name="SemanticSyntax PHP8 Coding Standard">
+  <description>
+    Coding standard for SemanticSyntax Validator (PHP 8.1+). 
+    Based on PSR-12 with additional rules for clean and maintainable code.
+  </description>
+
+  <!-- Directories to scan -->
+  <file>src</file>
+  <file>tests</file>
+
+  <!-- Base standard -->
+  <rule ref="PSR12"/>
+
+  <!-- Extra rules for stricter quality -->
+  <rule ref="Generic.Files.EndFileNewline"/>
+  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+  <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+  <rule ref="Squiz.Commenting.FunctionComment"/>
+  
+  <!-- File-level docblock disabled -->
+  <!-- <rule ref="Squiz.Commenting.FileComment"/> -->
+
+  <!-- Ban debug functions -->
+  <rule ref="Generic.PHP.ForbiddenFunctions">
+    <properties>
+      <property name="forbiddenFunctions" type="array">
+        <element key="var_dump" value="debug_print_backtrace"/>
+        <element key="print_r" value="debug_print_backtrace"/>
+        <element key="die" value="exit"/>
+        <element key="exit" value="exit"/>
+      </property>
+    </properties>
+  </rule>
+
+  <!-- Encoding and line endings -->
+  <config name="encoding" value="utf-8"/>
+  <config name="lineEnding" value="\n"/>
+
+  <!-- Custom settings -->
+  <arg name="colors"/>
+  <arg name="parallel" value="4"/>
+  <arg name="report-width" value="120"/>
+
+</ruleset>

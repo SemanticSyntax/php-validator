@@ -1,0 +1,58 @@
+{
+  "name": "semanticsyntax/validator-php7",
+  "description": "Strict-typed validation helpers for modern PHP 7.4 applications — where syntax meets meaning.",
+  "version": "1.0.0",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "php7",
+    "validation",
+    "validators",
+    "semantic",
+    "syntax",
+    "filter",
+    "clean-code"
+  ],
+  "homepage": "https://github.com/SemanticSyntax/php-validator",
+  "authors": [
+    {
+      "name": "SemanticSyntax",
+      "role": "Maintainer",
+	  "homepage": "https://github.com/SemanticSyntax"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SemanticSyntax\\Validation\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SemanticSyntax\\Validation\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "squizlabs/php_codesniffer": "^3.10",
+    "phpstan/phpstan": "^1.11"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit --no-coverage",
+    "lint": "vendor/bin/phpcs --standard=phpcs.xml src",
+    "fix": "vendor/bin/phpcbf --standard=phpcs.xml src || true",
+	"analyse": "vendor/bin/phpstan analyse src --level=max",
+    "check": [
+      "@lint",
+	  "@analyse",
+      "@test"
+    ]
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

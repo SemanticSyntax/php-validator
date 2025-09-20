@@ -1,0 +1,48 @@
+# EditorConfig for SemanticSyntax projects
+# Ensures consistent coding style across different editors and IDEs.
+# Part of the SemanticSyntax brand: clean, structured, and meaningful code.
+
+# Top-level configuration
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Markdown files — keep trailing spaces (needed for formatting in lists/tables)
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML / JSON configuration files
+[*.{yml,yaml,json}]
+indent_size = 2
+
+# PHP-specific files
+[*.php]
+indent_style = space
+indent_size = 4
+
+# JavaScript, CSS, HTML
+[*.{js,css,html}]
+indent_style = space
+indent_size = 2
+
+# VBScript (legacy support for SemanticSyntax demos)
+[*.vbs]
+indent_style = space
+indent_size = 4
+
+# Shell and config scripts
+[*.sh]
+indent_style = space
+indent_size = 2
+
+# XML and Dist config files
+[*.{xml,dist}]
+indent_style = space
+indent_size = 2

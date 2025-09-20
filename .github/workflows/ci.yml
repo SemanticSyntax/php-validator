@@ -1,0 +1,79 @@
+name: SemanticSyntax Validator CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  php:
+    name: PHP ${{ matrix.php }} – packages/${{ matrix.dir }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '5.6'
+            dir: php5
+          - php: '7.4'
+            dir: php7
+          - php: '8.1'
+            dir: php8
+          - php: '8.2'
+            dir: php8
+          - php: '8.3'
+            dir: php8
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Validate composer.json
+        working-directory: packages/${{ matrix.dir }}
+        run: composer validate --strict
+
+      - name: Install dependencies
+        working-directory: packages/${{ matrix.dir }}
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run lint (PHP_CodeSniffer)
+        working-directory: packages/${{ matrix.dir }}
+        run: composer lint
+
+      - name: Run static analysis (PHPStan)
+        if: ${{ matrix.php != '5.6' }}
+        working-directory: packages/${{ matrix.dir }}
+        run: composer analyse || true
+
+      - name: Run tests (PHPUnit)
+        working-directory: packages/${{ matrix.dir }}
+        run: composer test
+
+  meta:
+    name: Meta Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: EditorConfig compliance
+        uses: editorconfig-checker/action-editorconfig-checker@main
+
+      - name: Detect debug functions
+        run: |
+          if grep -R --include=*.php -nE "var_dump|print_r|die\\(|exit\\(" packages/; then
+            echo "❌ Debug functions detected. Please remove before committing."
+            exit 1
+          fi
+
+      - name: Validate Markdown files
+        uses: avto-dev/markdown-lint@v1
